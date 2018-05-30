@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>곡 제시 프로그램</title>
+<meta charset="utf-8">
+<script>
+var songs = [
+    "Don't Stop Bitleaving, by Jourbee",
+    "Material Geek, by Modonna",
+    "Just Code, by Lady LaLa",
+    "We're Not Going to Code It, by Twisted System",
+    "Code on Eileen, by Dexy's Midnight Webbers"
+];
+var num=prompt("좋아하는 노래의 단어를 입력하세요.","");
+var songs = ["javascriptAPI", "윤선희", "meister", "HTML5", "CSS"];
+function suggestSong() {
+	//추가 1 함수만들기
+	var index = Math.floor(Math.random()*songs.length);
+	document.write("총"+songs.length+"곡이 준비되어 있습니다."); //5
+	document.write("<p>"+index+"번째 곡");
+	var suggestion = songs[index];
+	return suggestion;
+		 
+}
+var song=suggestSong();
+document.write("오늘의 추천곡은 "+song+"입니다.");
+		
+function searchForSong(word) {
+	var song;
+	for(var i=0; i<songs.length; i++) {
+		song = songs[i];
+		if(songs[i].indexOf(word)>=0) {
+			return song+"곡이 있습니다.";
+		}
+		return "없는 곡입니다.";
+	}
+}
+
+var matchedSong = searchForSong(num);
+document.write("<p>"+mathchedSong);
+var song = suggestSong();
+var matchedSong = searchForSong("Code");
+alert(matchedSong);
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

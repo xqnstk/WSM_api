@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>커스텀 타일셋1</title>
+    <style></style>
+</head>
+<body>
+<div id="map" style="width:100%;height:350px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6ac81ce0761919a4f150cb2dcd5b070"></script>
+<script>
+var domain = 'http://i1.daumcdn.net';
+var path = '/dmaps/apis/openapi/sampleimg/';
+var plan = function( x, y, z ) {
+    y = -y - 1;
+    var limit = Math.ceil( 3 / Math.pow( 2, z ) );
+
+    if ( 0 <= y && y < limit && 0 <= x && x < limit ) {
+        return domain + path + 'planh' +
+            z + '_' + y + '_' + x + '.png';
+    } else {
+        return 'http://i1.daumcdn.net/dmaps/apis/white.png';
+    }
+};
+
+daum.maps.Tileset.add( 'PLAN',
+        new daum.maps.Tileset(
+            400, 300, plan, '', false, 1, 5 ) );
+
+var node = document.getElementById( 'map' );
+var map = new daum.maps.Map( node, {
+    projectionId: null,
+    mapTypeId: daum.maps.MapTypeId.PLAN,
+    $scale: false,
+    center: new daum.maps.Coords( 750, -650 ),
+    level: 2
+} );
+var center = map.getCenter();
+var marker = new daum.maps.Marker({
+    position: center
+});
+marker.setMap(map);
+
+var infowindow = new daum.maps.InfoWindow({
+    content: '미림여자정보고!'
+});
+infowindow.open(map, marker);
+</script>
+</body>
+</html>

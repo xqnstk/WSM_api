@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>dust</title>
+        <link href="dust.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6ac81ce0761919a4f150cb2dcd5b070&libraries=services"></script> 
+        <script src="jquery.xdomainajax.js" type="text/javascript"></script>
+        <script src="dust.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="dataDiv">
+            <div id="title"><span>실시간 대기오염정보 조회 서비스</span></div> 
+            <div id="blocks">
+                <div id="block1"> <div id="map" style="width:97%;height:97%;margin:1.5% auto;"></div></div>
+                <div id="block2">   
+                    <div id="b2">
+                    <select name="location" onChange="selectLoc(this.value);">
+                        <option value="">지역선택</option>
+                        <option value="서울특별시">서울</option>
+                        <option value="부산광역시">부산</option>
+                        <option value="대구광역시">대구</option>
+                        <option value="인천광역시">인천</option>
+                        <option value="광주광역시">광주</option>
+                        <option value="대전광역시">대전</option>
+                        <option value="울산광역시">울산</option>
+                        <option value="경기도">경기도</option>
+                        <option value="강원도">강원도</option>
+                        <option value="충청북도">충청북도</option>
+                        <option value="충청남도">충청남도</option>
+                        <option value="전라북도">전라북도</option>
+                        <option value="전라남도">전라남도</option> 
+                        <option value="경상북도">경상북도</option>
+                        <option value="경상남도">경상남도</option>
+                        <option value="제주특별자치도">제주</option>
+                    </select>		
+                    <button id="myloc" onclick="moveTomyLocation();">내위치</button> 
+                    <label id="myloctext">현재위치</label>
+                    </div>
+                </div>
+                <div id="block3">
+                    <table border="1">
+                        <caption>실시간 미세먼지 정보</caption>
+                        <tr>
+                            <th>측정날짜</th><td id="d_1">로딩중</td>
+                        </tr>
+                        <tr>
+                            <th>측정소</th><td id="d_2">로딩중</td>
+                        </tr>
+                        <tr>
+                            <th>통합지수</th><td id="d_3">로딩중</td>
+                        </tr>
+                        <tr>
+                            <th>미세먼지</th><td id="d_4">로딩중</td>
+                        </tr>
+                        <tr>
+                            <th>오존</th><td id="d_5">로딩중</td>
+                        </tr>
+                        <tr>
+                            <th>일산화 탄소</th><td id="d_6">로딩중</td>
+                        </tr>
+                        <tr>
+                            <th>내일 감기 지수</th><td id="d_7">로딩중</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

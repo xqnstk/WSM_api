@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>guess1</title>
+<meta charset="utf-8">
+</head>
+<body>
+<script>
+var guess =  "green";
+var answer = checkGuess();
+alert(answer);
+
+function checkGuess(){
+	var answers = ["red", "green", "blue"];
+	var index = Math.floor(Math.random()*answers.length);
+	if(guess==answer[index]){
+		answer="You're right! I was thinking of "+answers[index];
+	}else{
+		answer="sorry, I was thinking of "+answers[index];
+	}
+	return answer;
+}
+
+</script>
+</body>
+</html>
+

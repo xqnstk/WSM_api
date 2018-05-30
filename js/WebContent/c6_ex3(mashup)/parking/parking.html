@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>서울시 공영주차장 안내</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<style>
+		html, body {
+			padding:0px;
+			margin:0px;
+			width:100%;
+			height:100%;
+		}
+	</style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6ac81ce0761919a4f150cb2dcd5b0708d&libraries=services"></script> 
+<script src="parking.js"></script>
+</head>
+<body>
+
+<div id="cover_close" onclick="document.getElementById('cover_close').style.display = 'none';" style="cursor:pointer;">
+<!-- style.display = 'none': click 하면 사라짐 -->
+	<img src="bg_img.png" style="width:100%; height:100%; position:absolute; z-index:6;">
+	<img src="fg_txt.png" style="width:70%; height:100%;left:15%; position:absolute; z-index:7;">
+</div>
+<!--   1.지도  ->  3.셀렉트 유료 무료 버튼  4. 평일/주말, 평일 버튼 -> 5.버튼 -> 6.검정배경  ->  7.공영주차장그림 -->
+<div>
+<select id='pay' style="z-index:3; margin-left:10px; margin-top:5px; font-family:dotum; font-size:0.7em; vertical-align:middle;">
+ <option value='notfree' seleceted> 유료</option>
+ <option value='free' >무료</option>
+</select>
+
+<select id='run' style="z-index:4;font-family:dotum; font-size:0.7em; vertical-align:middle; margin-top:5px;">
+ <option value='week' seleceted> 평일/주말 이용가능</option>
+ <option value='weekday' >평일 이용가능</option>
+</select>
+
+<input  type='button' value='검색' id='button' style="font-family:dotum;z-index:5; font-size:0.7em; vertical-align:middle; margin-top:5px; background-color:#fff; border:0; cursor:pointer;"/>
+</div>
+<div id="map" style="width:100%; height:100%; z-index:1;"></div>
+
+</body>
+</html>

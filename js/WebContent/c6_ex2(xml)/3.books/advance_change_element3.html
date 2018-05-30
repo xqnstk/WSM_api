@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset=UTF-8>
+<body>
+	<script>
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("GET", "books.xml", false);
+		xmlhttp.send();
+		xmlDoc = xmlhttp.responseXML;
+		x = xmlDoc.getElementsByTagName("title")[0].childNodes[0];
+		txt = x.nodeValue;
+		document.write(txt+" /"); //every italian
+		document.write("<br>");
+		x = xmlDoc.getElementsByTagName("title")[0].childNodes[0];
+		x.nodeValue = "Easy Cooking"; //바뀜
+		x = xmlDoc.getElementsByTagName("title")[0].childNodes[0];
+		txt = x.nodeValue; //easy cooking
+		document.write(txt+" /");
+		document.write("<br>");
+		y = xmlDoc.getElementsByTagName("title")[1].childNodes[0];
+		txt = y.nodeValue; //harry potter
+		document.write(txt+" /");
+		document.write("<br>");
+		document.write("============================="+"<br>");
+		x = xmlDoc.getElementsByTagName("author")[0].childNodes[0];
+		document.write(x.nodeValue+"를 ")
+		x.nodeValue = "sunny";
+		document.write(x.nodeValue+"로 수정<br>");
+		
+		x = xmlDoc.getElementsByTagName("year")[0].childNodes[0];
+		document.write(x.nodeValue+"를 ")
+		x.nodeValue = "2015";
+		document.write(x.nodeValue+"로 수정");
+	</script>
+</body>
+</html>
+
+
+
+
+
+

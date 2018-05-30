@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<script>
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("GET", "books.xml", false);
+		xmlhttp.send();
+		xmlDoc = xmlhttp.responseXML;
+
+		x = xmlDoc.getElementsByTagName("book");
+		for (i = 0; i < x.length; i++) {
+			x[i].setAttribute("edition", "first");
+		}
+		x[x.length - 1].setAttribute("edition", "second");
+		//Output all attribute values
+		for (i = 0; i < x.length; i++) {
+			document.write("Category: " + x[i].getAttribute('category')
+					+ "<br>");
+			document.write("Edition: " + x[i].getAttribute('edition') + "<br>");
+		}
+		
+		document.write("============================="+"<br>");
+		x = xmlDoc.getElementsByTagName("book");
+		for (i = 0; i < x.length; i++) {
+			x[i].setAttribute("soldtotal", "100");
+		}
+		x[x.length - 1].setAttribute("soldtotal", "99");
+		for (i = 0; i < x.length; i++) {
+			document.write("Cover: " + x[i].getAttribute('cover') + "<br>");
+			document.write("Soldtotal: " + x[i].getAttribute('soldtotal') + "<br>");
+		}
+		
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

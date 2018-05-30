@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Phrase-o-matic (구절 자동 생성기)</title>
+<meta charset="utf-8">
+<style>
+body {
+	font-family: Verdana, Helvetica, sans-serif;
+}
+</style>
+<script>
+
+function makePhrases() {
+	var words1 = ["노랗고", "유난히", "그래서", "어제 받은", "군침 도는"];
+	var words2 = ["신선한", "맛이 간", "시원한", "커다란", "의문의"];
+	var words3 = ["우유", "오렌지 주스", "바나나", "마늘빵", "치킨과 맥주"];
+	var words4 = ["제일 좋아하고", "제일 싫어하고", "좋아하고", "싫어하고", "먹고싶은"];
+	var words5 = ["저녁식사에", "아침식사에", "간식으로", "야참으로", "다이어트시에"];
+	var words6 = ["먹고싶다", "먹기싫다", "권유하고싶다", "버리고싶다", "떼워먹고싶다"];
+
+	//구절 자동생성시 Math.random()함수 이용
+
+	var rand1=Math.floor(Math.random()*words1.length);
+	var rand2=Math.floor(Math.random()*words2.length);
+	var rand3=Math.floor(Math.random()*words3.length);
+	var rand4=Math.floor(Math.random()*words4.length);
+	var rand5=Math.floor(Math.random()*words5.length);
+	var rand6=Math.floor(Math.random()*words6.length);
+	
+	var phrase=words1[rand1]+ " " + words2[rand2] + " "+ words3[rand3] + " " + words4[rand4]+ " " + words5[rand5] + " "+ words6[rand6];
+	var phraseElement = document.getElementById("phrase");
+	
+	phraseElement.innerHTML=phrase;
+	
+	
+
+}
+window.onload = makePhrases;
+</script>
+</head>
+<body>
+<h1>구절 생성기 왈:</h1>
+
+<p id="phrase"></p>
+<p> 저는 유창한 언어제조기 입니다 원더풀~ </p>
+
+</body>
+</html>

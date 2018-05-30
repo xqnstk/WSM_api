@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>기온</title>
+<meta charset="utf-8">
+<script>
+window.onload = showTemps;
+
+function showTemps() {
+	//배열 선언 및 할당
+	var tempByHour = new Array();
+	tempByHour[0] = 59.2;
+	tempByHour[1] = 60.2;
+	tempByHour[2] = 58.2;
+	tempByHour[3] = 57.2;
+	tempByHour[4] = 53.2;
+	tempByHour[5] = 57.2;
+	tempByHour[6] = 53.2;
+	var sumTemp=0;
+	var aveTemp=0;
+
+	for (var i = 0; i < tempByHour.length; i++) {
+		var theTemp = tempByHour[i];
+		var id = "temp" + i;
+		var li = document.getElementById(id);
+		if (i == 0) {
+			li.innerHTML = "정오의 기온은 " + theTemp + "도였습니다.";
+		} else {
+			li.innerHTML = "오후 " + i + "시의 기온은 " + theTemp + "도였습니다.";
+		}
+		sumTemp=sumTemp+tempByHour[i];
+	}
+	
+	aveTemp=sumTemp/tempByHour.length;
+	output.innerHTML = "평균 기온은 "+aveTemp+"입니다.";
+}
+</script>
+</head>
+<body>
+<h1>기온</h1>
+<ul>
+	<li id="temp0"> </li>
+	<li id="temp1"> </li>
+	<li id="temp2"> </li>
+	<li id="temp3"> </li>
+	<li id="temp4"> </li>	
+	<li id="temp5"> </li>	
+	<li id="temp6"> </li>	
+</ul>
+<ul>
+	<!-- 영역 표시 -->
+
+
+
+
+
+
+
+</ul>
+</body>
+</html>
+

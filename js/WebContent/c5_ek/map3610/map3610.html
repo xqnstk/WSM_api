@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Map3610</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 90%;
+        margin: 0;
+        padding: 10;
+        background-color:lightyellow;
+      }
+      #map {
+        height: 100%;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+  <font face="나눔고딕" color="gray" size="6">
+		<p align="center">3610 이연재</p>
+  </font>
+    <div id="map"></div>
+    <script>
+
+/*지도 초기화 함수*/
+function initMap() {
+	//위도 경도 초기화
+	var korea = new google.maps.LatLng(37.467202,126.945361);
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: korea,
+    zoom: 13  
+  });
+
+  var coordInfoWindow = new google.maps.InfoWindow();
+  coordInfoWindow.setContent(createInfoWindowContent(korea, map.getZoom()));
+  coordInfoWindow.setPosition(korea);
+  coordInfoWindow.open(map);
+
+  map.addListener('zoom_changed', function() {
+    coordInfoWindow.setContent(createInfoWindowContent(korea, map.getZoom()));
+    coordInfoWindow.open(map);
+  });
+}
+
+var TILE_SIZE = 256;
+
+function createInfoWindowContent(latLng, zoom) {
+  var scale = 1 << zoom;
+
+  var worldCoordinate = project(latLng);
+
+  var pixelCoordinate = new google.maps.Point(
+      Math.floor(worldCoordinate.x * scale),
+      Math.floor(worldCoordinate.y * scale));
+
+  var tileCoordinate = new google.maps.Point(
+      Math.floor(worldCoordinate.x * scale / TILE_SIZE),
+      Math.floor(worldCoordinate.y * scale / TILE_SIZE));
+
+  return [
+    'KOREA, 관악구',
+    'LatLng: ' + latLng,
+    'Zoom level: ' + zoom,
+    'World Coordinate: ' + worldCoordinate,
+    'Pixel Coordinate: ' + pixelCoordinate,
+    'Tile Coordinate: ' + tileCoordinate
+  ].join('<br>');
+}
+
+function project(latLng) {
+  var siny = Math.sin(latLng.lat() * Math.PI / 180);
+
+  siny = Math.min(Math.max(siny, -0.9999), 0.9999);
+
+  return new google.maps.Point(
+      TILE_SIZE * (0.5 + latLng.lng() / 360),
+      TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI)));
+}
+
+    </script>
+    <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-AmhIy9r8DDmCs6gApucOEHaWOPeyKzE&signed_in=true&callback=initMap">
+    </script>
+  </body>
+</html>

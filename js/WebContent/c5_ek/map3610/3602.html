@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>민주의 지도</title> <!-- 제목 바꿈  -->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 800px; /* 크기 변경  */
+        width: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+      	background-color:green; /*배경색 바꿈*/
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+  <center><h1> 3602 김민주 </h1></center>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var loc = {lat: 37.527076, lng: 126.93244}; //위도경도 바꿈
+       
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15, //zoom바꿈
+          center: loc
+        });
+
+        var marker = new google.maps.Marker({
+          position: loc,
+          map: map,
+          title: '위도 : 37.527076, 경도 : 126.93244'
+        });
+
+        map.addListener('center_changed', function() {
+          // 3 seconds after the center of the map has changed, pan back to the
+          // marker.
+          window.setTimeout(function() {
+            map.panTo(marker.getPosition());
+          }, 3000);
+        });
+
+        marker.addListener('click', function() {
+          map.setZoom(8);
+          map.setCenter(marker.getPosition());
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf1DzGDRkXHBVpRC8oPDlQWHqiO1ApSqM 
+&callback=initMap">
+    </script>
+  </body>
+</html>

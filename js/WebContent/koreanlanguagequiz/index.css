@@ -1,0 +1,48 @@
+/* mightgumball.css */
+
+body {
+	margin-left: 40px;
+	margin-right: 40px;
+	background-image:url('image/bcg.jpg');
+	text-align: center;
+}
+h1{
+	color:#FF0000;
+}
+h2{
+	color:#000000;
+}
+div#lotQuiz {
+	background-color: #ffff66;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
+	text-align: left;
+}
+div.quiz {
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #003300;
+	padding: 10px;
+}
+
+div.quiz:first-child {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+div.quiz:last-child {
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+#titleDiv {
+	background-image: -webkit-linear-gradient(top, #5494D9,	#124B87);
+	width: 100%;
+	height: 50px;
+	padding-left: 5px;
+	}
