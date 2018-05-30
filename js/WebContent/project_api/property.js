@@ -197,54 +197,46 @@ function displayMarker(locPosition, message) {
 }
 
 function handleRefresh() {
-	//for (var i=2; i<=16; i=i+1 )
-	//{
-		var url="http://openapi.seoul.go.kr:8088/4a6a63497978716e36365544455967/json/octastatapi419/"+gus+"/"+gus;
-		var urll="http://openapi.seoul.go.kr:8088/4c4b71576578716e363065654a414b/json/octastatapi10164/"+gus+"/"+gus;
+	var url="http://openapi.seoul.go.kr:8088/4a6a63497978716e36365544455967/json/octastatapi419/"+gus+"/"+gus;
+	var url2="http://openapi.seoul.go.kr:8088/4c4b71576578716e363065654a414b/json/octastatapi10164/"+gus+"/"+gus;
 
-		$.getJSON(url, updateLibrary);
-		$.getJSON(urll, updateLibraryy);
-	//}//for
+	$.getJSON(url, updateLibrary);
+	$.getJSON(url2, draw);
+
 	addBound();// 지도에 원을 표시
 	//리스트 부분
     var newScriptElement = document.createElement("script");
 	newScriptElement.setAttribute("src", url);
-	var newScriptElementt = document.createElement("script");
-	newScriptElementt.setAttribute("src", urll);
+	var SCElement = document.createElement("script");
+	SCElement.setAttribute("src", url2);
 	
 	/*jsonp를 사용하여 스크립트 정보를 갱신*/
 	newScriptElement.setAttribute("id", "jsonp");
-	newScriptElementt.setAttribute("id", "jsonp");
+	SCElement.setAttribute("id", "jsonp");
 
 	var oldScriptElement = document.getElementById("jsonp");
 	var head = document.getElementsByTagName("head")[0];
+	
 	if(oldScriptElement == null){
 		head.appendChild(newScriptElement);
+		head.appendChild(SCElement);
 	}
 	else{
 		head.replaceChild(newScriptElement, oldScriptElement);
+		head.replaceChild(SCElement, oldScriptElement);
 	}
-	var oldScriptElementt = document.getElementById("jsonp");
-	var headd = document.getElementsByTagName("head")[0];
-	if(oldScriptElementt == null){
-		headd.appendChild(newScriptElementt);
-	}
-	else{
-		head.replaceChild(newScriptElementt, oldScriptElementt);
-	}
+
 }//handleRefresh
 
 function updateLibrary(librarys) {
    var librarys = librarys.octastatapi419.row;
    var addr = "";
-   
    var center = map.getCenter(); // 중심 가져오기 
    var position = {
           latitude : center.getLat(),
 		  longitude: center.getLng()
       };
    
-
    for (var i = 0; i < librarys.length; i++) {
       var lib = librarys[i];
       var imageSrc = "marker1.png",
@@ -255,7 +247,6 @@ function updateLibrary(librarys) {
             latitude : lib.XCNTS,
 			longitude: lib.YDNTS
       };
-	  
    }
    
    //밑에 리스트 추가하는 부분
@@ -283,7 +274,6 @@ function updateLibrary(librarys) {
 		else if(gus == 15) 	aaa=15;
 		else if(gus == 16) 	aaa=16;
 		
-		
 		div.innerHTML="";
 		if (aaa == gus) {
 			div.innerHTML = lib.JACHIGU;
@@ -291,42 +281,37 @@ function updateLibrary(librarys) {
 			div.innerHTML += "<input type=button value=위치" + " onclick=\"window.open('http://www.google.co.kr/maps/search/" + lib.JACHIGU + " ')\"/>"; 
 			
 			if (lib.GYE_2 != "") {
-				div.innerHTML += "<br>" + "한국인 : " + lib.GYE_2;
+				div.innerHTML += "<br>" + "한국인 거주자 : " + lib.GYE_2 + "명";
 			}
 			
 			if (lib.GYE_3 != "") {
-				div.innerHTML += "<br>" + "외국인 : " + lib.GYE_3;
+				div.innerHTML += "<br>" + "외국인 거주자 : " + lib.GYE_3 + "명";
 			}
-
-			
-			
-		if(librarysDiv.childElementCount==0){
-			librarysDiv.appendChild(div);
-		}
-		else{
-			librarysDiv.insertBefore(div, librarysDiv.firstChild);
-		}
-		}
-		
-	}
+			if(librarysDiv.childElementCount==0){
+				librarysDiv.appendChild(div);
+			}
+			else{
+				librarysDiv.insertBefore(div, librarysDiv.firstChild);
+			}
+		} //if
+	}//for
 	if(librarys.length > 0){
 		lastReportTime = librarys[librarys.length-1].time;
 	}
-}
+}//handleRefresh()
 
-function updateLibraryy(librarys) {
-	   var librarys = librarys.octastatapi10164.row;
+
+function draw(cfires) {
+	   var cfires = cfires.octastatapi10164.row;
 	   var addr = "";
-	   
 	   var center = map.getCenter(); // 중심 가져오기 
 	   var position = {
 	          latitude : center.getLat(),
 			  longitude: center.getLng()
 	      };
 	   
-
-	   for (var i = 0; i < librarys.length; i++) {
-	      var lib = librarys[i];
+	   for (var i = 0; i < cfires.length; i++) {
+	      var lib = cfires[i];
 	      var imageSrc = "marker1.png",
 			imageSize = new daum.maps.Size(27, 40), //마커의 크기(daummap에서 size 검색, 크기정보를 가지고 있는 사이즈 객체 생성)
 			imageOption = {offset: new daum.maps.Point(14, 28)};//point 검색, 화면 좌표 정보를 담고 있는 포인터 객체 생성
@@ -334,18 +319,17 @@ function updateLibraryy(librarys) {
 	      var loc = {//open API의 값들 위도와 경도
 	            latitude : lib.XCNTS,
 				longitude: lib.YDNTS
-	      };
-		  
-	   }
+	      }; 
+	   	}
 	   
 	   //밑에 리스트 추가하는 부분
-	   var librarysDiv = document.getElementById("fires");
-		librarysDiv.innerHTML="";
+	   	var cfiresDiv = document.getElementById("fires");
+		cfiresDiv.innerHTML="";
 		
-		for(var i=0; i<librarys.length; i++){
-			var lib = librarys[i];
+		for(var i=0; i<cfires.length; i++){
+			var lib = cfires[i];
 			var div = document.createElement("div");
-			div.setAttribute("class", "librarys");
+			div.setAttribute("class", "cfires");
 			var aaa;
 			if(gus == 2)	aaa= 2;
 			else if(gus == 3) 	aaa=3;
@@ -361,38 +345,30 @@ function updateLibraryy(librarys) {
 			else if(gus == 13) 	aaa=13;
 			else if(gus == 14) 	aaa=14;
 			else if(gus == 15) 	aaa=15;
-			else if(gus == 16) 	aaa=16;
+			else if(gus == 16) 	aaa=16;		
 			
-			
-			div.innerHTML="";
 			if (aaa == gus) {
-				div.innerHTML = lib.JACHIGU;
-				
-				div.innerHTML += "<input type=button value=위치" + " onclick=\"window.open('http://www.google.co.kr/maps/search/" + lib.JACHIGU + " ')\"/>"; 
-				
+		
 				if (lib.GYE_2 != "") {
-					div.innerHTML += "<br>" + "합계1 : " + lib.HAPGYE_1;
+					div.innerHTML += "<br>" + "화재 사건 수 : " + lib.HAPGYE_1 +"회";
 				}
-				
 				if (lib.GYE_3 != "") {
-					div.innerHTML += "<br>" + "합계2 : " + lib.HAPGYE_2;
+					div.innerHTML += "<br>" + "인명피해 : " + lib.HAPGYE_3 + "명";
 				}
-
-				
-				
-			if(librarysDiv.childElementCount==0){
-				librarysDiv.appendChild(div);
-			}
-			else{
-				librarysDiv.insertBefore(div, librarysDiv.firstChild);
-			}
-			}
+				if(cfiresDiv.childElementCount==0){
+					cfiresDiv.appendChild(div);
+				}
+				else{
+					cfiresDiv.insertBefore(div, cfiresDiv.firstChild);
+				}
+			} //if
 			
+		}//for
+
+		if(cfires.length > 0){
+			lastReportTime = cfires[cfires.length-1].time;
 		}
-		if(librarys.length > 0){
-			lastReportTime = librarys[librarys.length-1].time;
-		}
-	}
+}//draw()
 
 function addBound(){
 	// 지도에 표시할 원을 생성합니다
