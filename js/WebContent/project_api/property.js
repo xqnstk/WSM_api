@@ -173,6 +173,7 @@ function getmyLocation(){
 //지도에 마커와 인포윈도우를 표시하는 함수입니다. (내 위치 표시용)
 function displayMarker(locPosition, message) {
 
+
     // 마커를 생성합니다
     var marker = new daum.maps.Marker({  
         map: map, 
@@ -194,20 +195,22 @@ function displayMarker(locPosition, message) {
     // 지도 중심좌표를 접속위치로 변경합니다
     map.setCenter(locPosition);      
 }
+
 function handleRefresh() {
+	//for (var i=2; i<=16; i=i+1 )
+	//{
+		var url="http://openapi.seoul.go.kr:8088/4a6a63497978716e36365544455967/json/octastatapi419/"+gus+"/"+gus;
+		var urll="http://openapi.seoul.go.kr:8088/4c4b71576578716e363065654a414b/json/octastatapi10164/"+gus+"/"+gus;
 
-	var url="http://openapi.seoul.go.kr:8088/4a6a63497978716e36365544455967/json/octastatapi419/"+gus+"/"+gus;
-	var urll="http://openapi.seoul.go.kr:8088/4c4b71576578716e363065654a414b/json/octastatapi10164/"+gus+"/"+gus;
-
-	$.getJSON(url, updateLibrary);
-	$.getJSON(urll, updateLibraryy);
-
+		$.getJSON(url, updateLibrary);
+		$.getJSON(urll, updateLibraryy);
+	//}//for
 	addBound();// 지도에 원을 표시
 	//리스트 부분
     var newScriptElement = document.createElement("script");
 	newScriptElement.setAttribute("src", url);
-	var newScriptElementt = document.createElement("scriptt");
-	newScriptElement.setAttribute("src", urll);
+	var newScriptElementt = document.createElement("script");
+	newScriptElementt.setAttribute("src", urll);
 	
 	/*jsonp를 사용하여 스크립트 정보를 갱신*/
 	newScriptElement.setAttribute("id", "jsonp");
@@ -336,7 +339,7 @@ function updateLibraryy(librarys) {
 	   }
 	   
 	   //밑에 리스트 추가하는 부분
-	   var librarysDiv = document.getElementById("librarys");
+	   var librarysDiv = document.getElementById("fires");
 		librarysDiv.innerHTML="";
 		
 		for(var i=0; i<librarys.length; i++){
