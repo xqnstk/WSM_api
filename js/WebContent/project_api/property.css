@@ -22,7 +22,7 @@ body {
 }
 
 div#librarys {  
-	background-color: #F7BE81;
+	background-color: #FFB6C1;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 	margin: 10px 0px 0px 0px;
@@ -31,13 +31,48 @@ div#librarys {
 }
 div.librarys {  
 	font-family: Verdana, Helvetica, sans-serif;
-	color: #434343;
+	color: #FFB6C1;
 	padding: 10px;
 }
-div.librarys:nth-child(2n){
-	background-color: #FAFAD2;
+div#fires {  
+	background-color: #FFA8A5;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
 }
-
+div.fires {  
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #FFA8A5;
+	padding: 10px;
+}
+div#traffic {  
+	background-color:  #FFCFDA;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
+}
+div.traffic {  
+	font-family: Verdana, Helvetica, sans-serif;
+	color:  #FFCFDA;
+	padding: 10px;
+}
+div#disease {  
+	background-color: #FFDFDC;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
+}
+div.disease {  
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #FFDFDC;
+	padding: 10px;
+}
 div#map {
 	margin: 5px;
 	/*width: 250px;*/

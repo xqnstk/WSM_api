@@ -170,32 +170,6 @@ function getmyLocation(){
 	}
 }//myLocation
 
-//지도에 마커와 인포윈도우를 표시하는 함수입니다. (내 위치 표시용)
-function displayMarker(locPosition, message) {
-
-
-    // 마커를 생성합니다
-    var marker = new daum.maps.Marker({  
-        map: map, 
-        position: locPosition
-    }); 
-    
-    var iwContent = message, // 인포윈도우에 표시할 내용
-        iwRemoveable = true;
-
-    // 인포윈도우를 생성합니다
-    var infowindow = new daum.maps.InfoWindow({
-        content : iwContent,
-        removable : iwRemoveable
-    });
-    
-    // 인포윈도우를 마커위에 표시합니다 
-    infowindow.open(map, marker);
-    
-    // 지도 중심좌표를 접속위치로 변경합니다
-    map.setCenter(locPosition);      
-}
-
 function handleRefresh() {
 	var url="http://openapi.seoul.go.kr:8088/4a6a63497978716e36365544455967/json/octastatapi419/"+gus+"/"+gus;
 	var url2="http://openapi.seoul.go.kr:8088/4c4b71576578716e363065654a414b/json/octastatapi10164/"+gus+"/"+gus;
@@ -225,7 +199,6 @@ function handleRefresh() {
 
 	var oldScriptElement = document.getElementById("jsonp");
 	var head = document.getElementsByTagName("head")[0];
-	addBound();// 지도에 원을 표시
 
 	if(oldScriptElement == null){
 		head.appendChild(newScriptElement);
@@ -288,12 +261,11 @@ function updateLibrary(librarys) {
 		else if(gus == 15) 	aaa=15;
 		else if(gus == 16) 	aaa=16;
 		
-		div.innerHTML="";
+		
 		if (aaa == gus) {
-			div.innerHTML = lib.JACHIGU;
-			
-			div.innerHTML += "<input type=button value=위치" + " onclick=\"window.open('http://www.google.co.kr/maps/search/" + lib.JACHIGU + " ')\"/>"; 
-			
+			div.innerHTML = "------------------------인구밀도--------------------------";
+			div.innerHTML += "<input type=button value=구글맵으로" + " onclick=\"window.open('http://www.google.co.kr/maps/search/" + lib.JACHIGU + " ')\"/>"; 
+
 			if (lib.GYE_2 != "") {
 				div.innerHTML += "<br>" + "한국인 거주자 : " + lib.GYE_2 + "명";
 			}
@@ -363,7 +335,8 @@ function draw(cfires) {
 			else if(gus == 16) 	aaa=16;		
 			
 			if (aaa == gus) {
-		
+				div.innerHTML = "------------------------화재사건--------------------------";
+
 				if (lib.GYE_1 != "") {
 					div.innerHTML += "<br>" + "화재 사건 수 : " + lib.HAPGYE_1 +"회";
 				}
@@ -435,7 +408,7 @@ function trafficAcc(ctraffic) {
 			else if(gus == 16) 	aaa=16;		
 			
 			if (aaa == gus) {
-		
+				div.innerHTML = "------------------------교통사고---------------------------";
 				if (lib.BALSAENGGEONSU != "") {
 					div.innerHTML += "<br>" + "발생건수 : " + lib.BALSAENGGEONSU +"회";
 				}
@@ -509,15 +482,15 @@ function diseaseAcc(cdisease) {
 			else if(gus == 16) 	aaa=16;		
 			
 			if (aaa == gus) {
-		
+				div.innerHTML = "------------------------전염병--------------------------";
 				if (lib.BALSAENG_1 != "") {
-					div.innerHTML += "<br>" + "1군감염병(장티푸스, A형 감염 ..) : " + lib.BALSAENG_1 +"명";
+					div.innerHTML += "<br>" + "1군감염병(장티푸스, A형 감염) : " + lib.BALSAENG_1 +"명";
 				}
 				if (lib.BALSAENG_7 != "") {
-					div.innerHTML += "<br>" + "2군감염병(수두, B형 감염 ..) : " + lib.BALSAENG_7 + "명";
+					div.innerHTML += "<br>" + "2군감염병(수두, B형 감염) : " + lib.BALSAENG_7 + "명";
 				}
 				if (lib.BALSAENG_16 != "") {
-					div.innerHTML += "<br>" + "3군감염병(결핵, 쯔쯔가무시증, 말라리아 ..) : " + lib.BALSAENG_16 + "명";
+					div.innerHTML += "<br>" + "3군감염병(결핵, 쯔쯔가무시증, 말라리아) : " + lib.BALSAENG_16 + "명";
 				}
 				if(cdiseaseDiv.childElementCount==0){
 					cdiseaseDiv.appendChild(div);
@@ -533,28 +506,6 @@ function diseaseAcc(cdisease) {
 		}
 }//diseaseAcc()
 
-
-function addBound(){
-	// 지도에 표시할 원을 생성합니다
-	var bound = new daum.maps.Circle({
-	   center : map.getCenter(),  // 원의 중심좌표 입니다 
-	   radius: 3000, // 미터 단위의 원의 반지름입니다 
-	   strokeWeight: 5, // 선의 두께입니다 
-	   strokeColor: '#F7D358', // 선의 색깔입니다
-	   strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	   strokeStyle: 'solid', // 선의 스타일 입니다
-	   fillColor: '#F7FE2E', // 채우기 색깔입니다
-	   fillOpacity: 0.3,  // 채우기 불투명도 입니다
-	   zIndex: 1
-	}); 
-	
-	// 지도에 원을 표시합니다 
-	bound.setMap(map);
-
-	daum.maps.event.addListener(map, 'dragstart', function() {//지도가 이동될때도 원이 다시 그려짐
-		bound.setMap(null);
-	});
-}
 
 
 
